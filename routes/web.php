@@ -48,6 +48,7 @@ Route::get('/cmessages', [CMessageController::class, 'index']);
 Route::post('/cmessages/storeall', [CMessageController::class, 'storeall']);
 Route::post('/cmessages/storefiliere', [CMessageController::class, 'storefiliere']);
 Route::post('/cmessages/storeclasse', [CMessageController::class, 'storeclasse']);
+Route::post('/cmessages/storeniveau', [CMessageController::class, 'storeniveau']);
 Route::get('/cmessages/all', function(){
     return view('cmessages.all');
 });
@@ -57,6 +58,14 @@ Route::get('/cmessages/filiere', function(){
 
     return view('cmessages.filiere', compact('ecoles'));
 });
+
+Route::get('/cmessages/niveau', function(){
+    $ecoles = App\Models\Ecole::all();
+
+    return view('cmessages.niveau');
+});
+
+
 
 Route::get('/cmessages/classe', function(){
     $ecoles = App\Models\Ecole::all();

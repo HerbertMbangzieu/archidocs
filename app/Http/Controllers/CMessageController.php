@@ -76,7 +76,24 @@ class CMessageController extends Controller
             'niveau_id' => 'required',
             'contenu' => 'required',
         ]);
-        $niveaux = Niveau::find($data['niveau_id']);
+        $niveau = Niveau::find($data['niveau_id']);
+        
+            $cmessage = new CMessage();
+            $cmessage->niveau_id = $niveau->id;
+            $cmessage->title = $data["title"];
+            $cmessage->contenu = $data["contenu"];
+            $cmessage->save();
+    }
+
+
+      public function storeniveau(Request $request)
+    {
+        $data = $request->validate([
+            'title' => 'required',
+            'niveau' => 'required',
+            'contenu' => 'required',
+        ]);
+        $niveaux = Niveau::where('niveau', $data['niveau'])->get();
         foreach($niveaux as $niveau){
             $cmessage = new CMessage();
             $cmessage->niveau_id = $niveau->id;
