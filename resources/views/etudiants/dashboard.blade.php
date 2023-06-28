@@ -12,8 +12,8 @@
 
 @section('content')
     <div class="px-5 py-16 rounded m-5 grid grid-cols-3 gap-4 border-[1px]">
-        <a href="" class="py-3 text-center text-lg bg-red-800 text-white"> Emploi de temps</a>     
-        <a href="/etudiants/{{$etudiant->id}}" class="py-3 text-center text-lg bg-red-800 text-white"> Messages</a>     
-        <a href="" class="py-3 text-center text-lg bg-red-800 text-white"> Documents</a>     
+        <a href="" class="py-3 text-center bg-red-800 text-white"> consulter les Emploi de temps</a>     
+        <a href="/etudiants/{{$etudiant->id}}" class="py-3 text-center bg-red-800 text-white"> consulter les Messages</a>     
+        <a href="" class="py-3 text-center bg-red-800 text-white"> consulter les Documents</a>     
     </div>
 @endsection

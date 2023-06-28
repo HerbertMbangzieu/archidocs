@@ -5,7 +5,9 @@ use App\Http\Controllers\EcoleController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\CMessageController;
+use App\Http\Controllers\EMessageController;
 use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\EnseignantController;
 use App\Models\Cycle;
 use App\Models\Filiere;
 use App\Models\Niveau;
@@ -50,10 +52,13 @@ Route::post('/cmessages/storeall', [CMessageController::class, 'storeall']);
 Route::post('/cmessages/storefiliere', [CMessageController::class, 'storefiliere']);
 Route::post('/cmessages/storeclasse', [CMessageController::class, 'storeclasse']);
 Route::post('/cmessages/storeniveau', [CMessageController::class, 'storeniveau']);
-Route::get('/message/{cmessage}/{etudiant}', [CMessageController::class, 'show']);
 Route::get('/cmessages/all', function(){
     return view('cmessages.all');
 });
+
+
+Route::get('/message/{cmessage}/{etudiant}', [CMessageController::class, 'show']);
+Route::get('/emessage/{emessage}/{enseignant}', [EMessageController::class, 'show']);
 
 Route::get('/cmessages/filiere', function(){
     $ecoles = App\Models\Ecole::all();
@@ -78,6 +83,14 @@ Route::get('/cmessages/classe', function(){
 
 Route::get('/etudiants/{etudiant}', [EtudiantController::class, 'index']);
 Route::get('/etudiants/dashboard/{etudiant}', [EtudiantController::class, 'show']);
+
+// Route::get('/enseignants/{enseignant}', [EnseignantController::class, 'index']);
+Route::get('/enseignants/messages/{enseignant}', [EnseignantController::class, 'showmessages']);
+Route::get('/enseignants/dashboard/{enseignant}', [EnseignantController::class, 'show']);
+
+
+Route::get('/emessages', [EMessageController::class, 'index']);
+Route::post('/emessages/store', [EMessageController::class, 'store']);
 
 
 
@@ -130,4 +143,12 @@ Route::get('/addEtudiant', function(){
         'niveau_id'=> 2,
     ]);
 });
+
+Route::get('/addEnseignant', function(){
+    return App\Models\Enseignant::create([
+        'nom'=>'Frederick Fokam',
+    ]);
+});
+
+
 
