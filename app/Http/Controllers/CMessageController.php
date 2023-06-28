@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CMessage;
 use App\Models\Niveau;
 use App\Models\Filiere;
+use App\Models\Etudiant;
 use Illuminate\Http\Request;
 
 class CMessageController extends Controller
@@ -39,7 +40,7 @@ class CMessageController extends Controller
     {
         $data = $request->validate([
             'title' => 'required',
-            'contenu' => 'required',
+            'contenu' => 'required|max:100000',
         ]);
         $niveaux = Niveau::all();
         foreach($niveaux as $niveau){
@@ -49,14 +50,16 @@ class CMessageController extends Controller
             $cmessage->contenu = $data["contenu"];
             $cmessage->save();
         }
+        return redirect('/cmessages');
     }
+
 
     public function storefiliere(Request $request)
     {
         $data = $request->validate([
             'title' => 'required',
             'filiere_id' => 'required',
-            'contenu' => 'required',
+            'contenu' => 'required|max:100000',
         ]);
         $filiere = Filiere::find($data['filiere_id']);
         foreach($filiere->niveaus as $niveau){
@@ -66,6 +69,7 @@ class CMessageController extends Controller
             $cmessage->contenu = $data["contenu"];
             $cmessage->save();
         }
+        return redirect('/cmessages');
     }
 
     public function storeclasse(Request $request)
@@ -83,6 +87,9 @@ class CMessageController extends Controller
             $cmessage->title = $data["title"];
             $cmessage->contenu = $data["contenu"];
             $cmessage->save();
+
+            
+        return redirect('/cmessages');
     }
 
 
@@ -91,7 +98,7 @@ class CMessageController extends Controller
         $data = $request->validate([
             'title' => 'required',
             'niveau' => 'required',
-            'contenu' => 'required',
+            'contenu' => 'required|max:100000',
         ]);
         $niveaux = Niveau::where('niveau', $data['niveau'])->get();
         foreach($niveaux as $niveau){
@@ -101,8 +108,10 @@ class CMessageController extends Controller
             $cmessage->contenu = $data["contenu"];
             $cmessage->save();
         }
-    }
 
+        
+        return redirect('/cmessages');
+    }
 
 
 
@@ -117,9 +126,9 @@ class CMessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show(CMessage $cmessage, Etudiant $etudiant)
     {
-        //
+        return view('etudiants.message', compact('cmessage'), compact('etudiant'),);
     }
 
     /**

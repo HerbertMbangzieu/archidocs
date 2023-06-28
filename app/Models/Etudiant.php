@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Niveau;
 
-class CMessage extends Model
+class Etudiant extends Model
 {
     use HasFactory;
+    protected $fillable = ['nom', 'niveau_id'];
 
-    protected $fillabe = ['title', 'contenu', 'niveau_id'];
-
-    public function niveau(){
+    public function niveaus(){
         return $this->belongsTo(Niveau::class);
     }
 }

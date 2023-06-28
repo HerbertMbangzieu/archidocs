@@ -5,6 +5,7 @@ use App\Http\Controllers\EcoleController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\CMessageController;
+use App\Http\Controllers\EtudiantController;
 use App\Models\Cycle;
 use App\Models\Filiere;
 use App\Models\Niveau;
@@ -49,6 +50,7 @@ Route::post('/cmessages/storeall', [CMessageController::class, 'storeall']);
 Route::post('/cmessages/storefiliere', [CMessageController::class, 'storefiliere']);
 Route::post('/cmessages/storeclasse', [CMessageController::class, 'storeclasse']);
 Route::post('/cmessages/storeniveau', [CMessageController::class, 'storeniveau']);
+Route::get('/message/{cmessage}/{etudiant}', [CMessageController::class, 'show']);
 Route::get('/cmessages/all', function(){
     return view('cmessages.all');
 });
@@ -74,6 +76,8 @@ Route::get('/cmessages/classe', function(){
 });
 
 
+Route::get('/etudiants/{etudiant}', [EtudiantController::class, 'index']);
+Route::get('/etudiants/dashboard/{etudiant}', [EtudiantController::class, 'show']);
 
 
 
@@ -118,5 +122,12 @@ Route::get('/getCycle/{cycle}', function(App\Models\Cycle $cycle){
 Route::get('/cmessages/getFiliere/{filiere}', function(App\Models\Filiere $filiere){
     $niveaux = $filiere->niveaus;
     return response()->json($niveaux, 200);
+});
+
+Route::get('/addEtudiant', function(){
+    return App\Models\Etudiant::create([
+        'nom'=>'Batchama Emmanuel',
+        'niveau_id'=> 2,
+    ]);
 });
 

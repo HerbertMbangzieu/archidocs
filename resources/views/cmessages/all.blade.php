@@ -24,10 +24,16 @@
     <div class="input-group px-3">
         <label for="title" class="text-lg font-bold">Titre</label>
         <input type="text" name="title" id="title" placeholder="Entrer le titre" class="mt-1 w-full p-1 rounded border-[1px]">
+        @error('title')
+            <p-2 class="text-red-600"> {{$message}} </p-2>
+        @enderror
     </div>
     <div class="input-group px-3">
         <label for="contenu" class="text-lg font-bold">Message</label>
         <textarea name="contenu" id="contenu" cols="30" rows="10" class="mytextarea rounded w-full"></textarea>
+        @error('contenu')
+            <p-2 class="text-red-600"> {{$message}} </p-2>
+        @enderror
     </div>
     <div class="input-group mt-2 px-3">
         <button class="py-2 px-20 md:px-28 lg:px-36 text-white bg-green-700 rounded hover:bg-green-600 active:scale(90)">Envoyer</button>

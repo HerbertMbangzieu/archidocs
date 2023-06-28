@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Filiere;
+use App\Models\Etudiant;
+use App\Models\CMessage;
 
 class Niveau extends Model
 {
@@ -19,4 +21,16 @@ class Niveau extends Model
     public function filiere(){
         return $this->belongsTo(Filiere::class);
     }
+
+    public function etudiant(){
+        return $this->hasMany(Etudiant::class);
+    }
+
+    public function cmessages(){
+        return $this->hasMany(CMessage::class);
+    }
+
+
+
+
 }
